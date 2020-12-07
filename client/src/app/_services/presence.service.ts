@@ -24,7 +24,7 @@ export class PresenceService {
         accessTokenFactory: () => user.token
       })
       .withAutomaticReconnect()
-      .build()
+      .build();
 
     this.hubConnection
       .start()
@@ -32,13 +32,13 @@ export class PresenceService {
 
     this.hubConnection.on('UserIsOnline', username => {
       this.onlineUsers$.pipe(take(1)).subscribe(usernames => {
-        this.onlineUsersSource.next([...usernames, username])
+        this.onlineUsersSource.next([...usernames, username]);
       })
     })
 
     this.hubConnection.on('UserIsOffline', username => {
       this.onlineUsers$.pipe(take(1)).subscribe(usernames => {
-        this.onlineUsersSource.next([...usernames.filter(x => x !== username)])
+        this.onlineUsersSource.next([...usernames.filter(x => x !== username)]);
       })
     })
 

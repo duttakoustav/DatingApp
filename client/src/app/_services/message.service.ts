@@ -27,7 +27,7 @@ export class MessageService {
         accessTokenFactory: () => user.token
       })
       .withAutomaticReconnect()
-      .build()
+      .build();
 
     this.hubConnection.start().catch(error => console.log(error));
 
@@ -37,7 +37,7 @@ export class MessageService {
 
     this.hubConnection.on('NewMessage', message => {
       this.messageThread$.pipe(take(1)).subscribe(messages => {
-        this.messageThreadSource.next([...messages, message])
+        this.messageThreadSource.next([...messages, message]);
       })
     })
 
@@ -46,7 +46,7 @@ export class MessageService {
         this.messageThread$.pipe(take(1)).subscribe(messages => {
           messages.forEach(message => {
             if (!message.dateRead) {
-              message.dateRead = new Date(Date.now())
+              message.dateRead = new Date(Date.now());
             }
           })
           this.messageThreadSource.next([...messages]);
